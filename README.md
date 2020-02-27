@@ -2,7 +2,6 @@
 
 Minimizing the average error in training the model has always been in a spotlight, i.e., finding the highest accuracy in terms of MAE, MSE, and so on. In our formulation, not only the accuracy experiences improvement but also the variance of the error has shrunk.
 
-
 ## Requirements
 - scipy>= 1.3.1
 - numpy>=1.16.1
@@ -18,14 +17,14 @@ pip install -r requirements.txt
 We use the METR-LA data from the following paper:<br>
 [Yaguang Li, Rose Yu, Cyrus Shahabi, Yan Liu, Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting, ICLR 2018](https://arxiv.org/abs/1707.01926).<br> 
 You can find the original data from the [GitHub page](https://github.com/liyaguang/DCRNN) of this paper.
-The data includes the recorded speed of Los Angeles highways collected by loop sensors. It contains records of 207 sensors from March 1st 2012 to Jun 30th 2012. The location of sensors are shown in the following figure: <br>
+The data includes the recorded speed of Los Angeles highways collected by loop sensors. It contains records of 207 sensors from March 1st 2012 to Jun 30th 2012. The location of the sensors are shown in the following figure: <br>
 
 <p align="center">
   <img width="250" height="250" src="https://github.com/ghafeleb/TrafficPrediciton_MinMaxPercentage/blob/master/figures/METR-LA.JPG">
 </p><br>
 To use the METR-LA data in our model, we changed the structure of data. For example, the structure of one record in our history data before normalization is:<br>
 
-|                     | Day number at 2012/03/01 | Average time in minutes between 02:10:00-02:15:00 | Average speed between 02:10:00-02:15:00 | Day number at 2012/03/01 | ... | Average speed between 03:05:00-03:10:00 |
+|                     | Day number on 2012/03/01 | Average time in minutes between 02:10:00-02:15:00 | Average speed between 02:10:00-02:15:00 | Day number on 2012/03/01 | ... | Average speed between 03:05:00-03:10:00 |
 |:-------------------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
 | Sensor x at 2012/03/01 02:10:00 |   4   |   132.5   |   70.0   |   4   |    ...   |   65.0   |
 
@@ -41,16 +40,15 @@ The label data includes the speed of each sensor for the next 1 hour. For exampl
 
 The pickled file (metr_la_70_20.pkl) of the history and label data is available at [Google Drive](https://drive.google.com/drive/folders/18edZ3gsBkukyir8r0t8cCGBwWHQZs-k9?usp=sharing). The history data (X.csv) and label data (Y.csv) with CSV format are also available at the same [Google Drive](https://drive.google.com/drive/folders/18edZ3gsBkukyir8r0t8cCGBwWHQZs-k9?usp=sharing) folder. We have used min-max scaling to normalize the data between 0 and 100.
 
-## Get Started
-First, run the following command:
+First, run the following command to create the data directories:
 ```bash
-# Create trained models directories
-mkdir -p saved_models
-
 # Create data directories
 mkdir -p data, data/pickle, data/pickle_plt, data/model
 ```
-Next, you can train your model by "trainer_nn.py":
+Next, copy the pickled data at "data/pickle" and copy two CSV files at "data".
+
+## Train the model
+You can train your model by "trainer_nn.py":
 ```bash
 # Train the model
 python trainer_nn.py
